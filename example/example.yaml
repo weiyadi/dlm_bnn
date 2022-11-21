@@ -1,0 +1,26 @@
+valid_size: 0.0
+num_workers: 1
+save_interval: 3
+regression: False
+
+n_epochs: 10 # 500 in real experiments
+priors:
+  prior_mu: 0
+  prior_sigma: 0.05
+  posterior_mu_initial: [0, 0.1]  # (mean, std) normal_
+  posterior_rho_initial: [-5, 0.1]  # (mean, std) normal_
+
+
+lr_start: 0.001
+L_train: 5
+L_test: 10
+
+# Configurations for collapsed variational inference and empirical Bayes
+alpha_reg: 0.05
+gamma: 0.3
+alpha: 0.5
+beta: 0.01
+delta: 0.1
+gamma_alpha: 4.4798
+gamma_beta: 10
+

@@ -9,6 +9,7 @@ https://arxiv.org/abs/2211.08393
 This repository has the following directory structure
  * *README*: This file.
  * *data*: prepares data.
+ * *example*: contains two example model file and one configuration file for running the demonstration below.
  * *models*: contains the implementation of the neural networks.
  * *posteriors*: contains the implementation of variational inference.
  * *helpers.py*: contains the helper functions to train and evaluate of the models.
@@ -35,7 +36,8 @@ or eb (empirical bayes);
 `--save_path` sets the directory to save the models, default 'checkpoints'';
 `--init_path` is the path of the model to initialize;
 `--smooth` sets the smooth parameter for the loss function, default 0, meaning no smoothing;
-`--config` is the path for configuration file, e.g. `example/example.yaml`.
+`--config` is the path for configuration file that contains learning rate, training epochs, sample_sizes, etc, 
+we provide `example/example.yaml` as an example.
 Below is an example to run this script without initialization:
 ```console
 python run_vi.py --dataset CIFAR10 --net_type AlexNet --metric ELBO --seed 1 --beta 0.1 --reg naive --batch_size 512 \
@@ -46,6 +48,12 @@ and an example to run with initialization:
 python run_vi.py --dataset CIFAR10 --net_type AlexNet --metric ELBO --seed 1 --beta 0.1 --reg naive --batch_size 512 \
 --prior_var 0.05 --save_path checkpoints --init_path example/elbo.pt --config example/example.yaml
 ```
+Users can freely change arguments including the dataset, neural network and the configuration file. 
+The above scripts will produce several `.pt` files that save the model state dictionary at the certain epochs, 
+depending on the choice of `save_interval` in the config file, 
+and one `.npz` file that saves the statistics along optimization, including train_obj (elbo if metric selects ELBO, otherwise dlm), 
+train_acc, train_kl, test_loss, test_acc, train_loss, other_obj (dlm if metric selects ELBO, otherwise elbo). 
+The `.pt` files can be used to produce loss surfaces. The `.npz` file can be used to produce learning curves.
 
 ## Run variational inference using bounded optimization
 We run `run_vi_bo.py` to train a model using bounded optimization with either ELBO or DLM. The arguments are similar to 

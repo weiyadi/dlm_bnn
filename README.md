@@ -20,8 +20,9 @@ This repository has the following directory structure
  * *requirements.txt*: requirements of python packages.
 
 ## Run variational inference with ELBO or DLM
-It is better to run everything on a GPU for faster speed.
-We run `run_vi.py` to train a model with different loss functions. 
+It is better to run everything on a GPU for faster speed. On a V100 GPU, it would normally take 1min for each epoch.
+It is not recommended to run the script with large image datasets and complicated neural networks on CPU because it would take forever.
+We run `run_vi.py` to train a model with different loss functions.  
 `--dataset` sets the dataset, CIFAR10, CIFAR100, SVHN or STL10; 
 `--net_type` sets the neural network structure, AlexNet or PreResNet20;
 `--metric` sets the loss function, ELBO or DLM;
@@ -71,6 +72,6 @@ python run_vi_bo.py --dataset CIFAR10 --net_type AlexNet --metric ELBO --seed 1 
 `--model_path1` and `--model_path2` specify the paths of two models.
 ```console
 python loss_surface.py --dataset CIFAR10 --net_type AlexNet --batch_size 512 --prior_var 0.05 --beta 0.1 \
---model_path1 example/elbo.pt --model_path2 example/dlm.pt
+--model_path1 example/elbo.pt --model_path2 example/dlm.pt --config example/example.yaml
 ```
-The figure will be saved as `loss_surface-CIFAR10-AlexNet-prior0.05.pdf`.
+The figure will be saved as `loss_surface-CIFAR10-AlexNet-prior0.05.pdf`. It will take ~20 mins to finish on a V100 GPU.

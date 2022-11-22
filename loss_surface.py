@@ -61,11 +61,11 @@ if __name__ == '__main__':
     beta = args.beta
 
     # Load the models
-    state_dict1 = torch.load(args.model_path1)
+    state_dict1 = torch.load(args.model_path1, map_location=device)
     mu1 = state_dict1['mu'].cpu().numpy()
     rho1 = state_dict1['rho'].cpu().numpy()
 
-    state_dict2 = torch.load(args.model_path2)
+    state_dict2 = torch.load(args.model_path2, map_location=device)
     mu2 = state_dict2['mu'].cpu().numpy()
     rho2 = state_dict2['rho'].cpu().numpy()
 

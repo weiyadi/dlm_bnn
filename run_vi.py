@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
     init_beta = 0.1
     if args.init_path != '':
-        model_state_dict = torch.load(args.init_path)
+        model_state_dict = torch.load(args.init_path, map_location=device)
         pos_mean, pos_rho = model_state_dict['mu'], model_state_dict['rho']
 
     vi_model = VIFFGModel(model_cfg.base, priors, args.reg, cfg, pos_mean=pos_mean, pos_rho=pos_rho, *model_args,
